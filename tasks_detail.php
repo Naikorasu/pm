@@ -5,7 +5,11 @@ foreach ($_REQUEST as $key => $value) {
 	$$key = $value;
 }
 
-$detail = "SELECT * FROM";
+$condition =  array('id'=>$id);
+$detail = "SELECT * FROM TR_TASK WHERE id = :id";
+$detail = $db->select($detail,$condition);
+
+$task_title = $detail[0]['title'];
 
 ?>
 <!DOCTYPE HTML>
@@ -30,8 +34,8 @@ include_once("head.php");
 				<div class="forms">
 				
 					<div class="row">
-						<h3 class="title1">Task Detail</h3>
-						<p><?=$id;?></p>
+						<h3 class="title1"><?=strtoupper($task_title);?></h3>
+						<h5><?=$id;?></h5>
 
 						<div class="form-three widget-shadow">
 							<form class="form-horizontal">
