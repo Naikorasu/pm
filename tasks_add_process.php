@@ -10,10 +10,8 @@ foreach ($_REQUEST as $key => $value) {
 	$$key = $value;
 }
 
-$user = $_SESSION['0c83f57c786a0b4a39efab23731c7ebc'];
-
 $id = md5($task_project.$task_title.$user.microtime());
-$modified = date('d/m/Y');
+$modified = date('Y/m/d h:i:s');
 
 $insert_data = array(
 	'id'=>$id,
@@ -25,7 +23,7 @@ $insert_data = array(
 	'user_dev'=>$task_dev,
 	'user_qa'=>$task_qa,
 	'description'=>$task_desc,
-	'hashtag'=>$hashtag,
+	'hashtag'=>$task_hashtag,
 	'deadline'=>$task_deadline,
 	'stat'=>0,
 	'modified'=>$modified,

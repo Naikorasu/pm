@@ -25,6 +25,14 @@ foreach ($get_stat as $key => $value) {
 	$param_stat[$code] = $value['name'];
 }
 
+$get_user = "SELECT * FROM AUTH_USER";
+$get_user = $db->select($get_user);
+
+foreach ($get_user as $key => $value) {
+	$email = $value['email'];
+	$name = $value['name'];
+	$param_user[$email] = $name;
+}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -44,6 +52,11 @@ include_once("head.php");
 		<!-- main content start -->
 		<div id="page-wrapper">
 			<div class="main-page">
+
+				<ol class="breadcrumb">
+					<li><a href="index.php">Dashboard</a></li>
+					<li class="active">Task List</li>
+				</ol>
 				
 				<div class="tables">
 					<h3 class="title1">Task List</h3>
@@ -55,6 +68,8 @@ include_once("head.php");
 								  <th>#</th>
 								  <th>Task Title</th>
 								  <th>Type</th>
+								  <th>Development</th>
+								  <th>QA</th>
 								  <th>Status</th>
 								  <th>Detail</th>
 								</tr>
@@ -69,7 +84,25 @@ include_once("head.php");
 									$task_title = $value['title'];
 									$task_stat = $value['stat'];	
 									$task_type = $value['type'];	
-									$task_sub_type = $value['sub_type'];	
+									$task_sub_type = $value['sub_type'];
+									$task_dev = $value['user_dev'];
+									$task_qa = $value['user_qa'];
+									$task_project = $value['project'];
+
+
+
+									$project = "SELECT * FROM TR_PROJECT WHERE id = '$task_project'";
+									$project = $db->select($project);
+
+									$project_pic_email = $project[0]['pic_email'];
+
+
+								  	if($user == $task_dev || $user == $task_qa || $user == $project_pic_email) {
+								  		$flag = "allow";
+								  	}
+								  	else {
+								  		$flag = "";
+								  	}
 
 									?>
 									<tr>
@@ -81,13 +114,58 @@ include_once("head.php");
 											<font style="font-size: 10px;"><?=$task_id;?></font>
 										</code>
 									  </td>
-									  <td><?=$param_type[$task_type];?> - <?=$param_sub[$task_sub_type];?></td>
+									  <td><?=$param_sub[$task_sub_type];?><br/><?=$param_type[$task_type];?></td>
 									  <td>
-										<a href="tasks_detail.php?id=<?=$task_id;?>"">
-											<span class="label label-primary"><?=$param_stat[$task_stat];?></span>
-										</a>
-									</td>
-									  <td><a href="tasks_detail.php?id=<?=$task_id;?>">click here</a></td>
+									  	<?=$param_user[$task_dev];?>
+									  	<br/>
+									  	<?=$task_dev;?>
+									  </td>
+									  <td>
+									  	<?=$param_user[$task_qa];?>
+									  	<br/>
+									  	<?=$task_qa;?>
+									  </td>
+									  <td>
+									  	<?
+										$array_class = array(
+											0=>'danger',
+										 	1=>'warning', 
+										 	2=>'warning', 
+										 	3=>'success', 
+										 	4=>'success',
+										 	5=>'info',
+										 	6=>'danger',
+										 	9=>'warning',
+										 );
+
+										$label_class = $array_class[$task_stat];
+										
+
+									  	if($flag == "allow") {
+									  		?>
+											<a href="tasks_detail.php?id=<?=$task_id;?>"">
+												<span class="label label-<?=$label_class;?>"><?=$param_stat[$task_stat];?></span>
+											</a>
+									  		<?
+									  	}
+									  	else {
+									  		?>
+									  		<span class="label label-<?=$label_class;?>"><?=$param_stat[$task_stat];?></span>
+									  		<?
+									  	}
+									  	?>
+									  </td>
+								      <td>
+								      	<?
+									  	if($flag == "allow") {
+									  		?>
+								  			<a href="tasks_detail.php?id=<?=$task_id;?>">click here</a>
+									  		<?
+									  	}
+									  	else {
+									  	}
+									  	?>
+								      </td>
 									</tr>
 									<?
 								}

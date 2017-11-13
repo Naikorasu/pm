@@ -29,6 +29,12 @@ include_once("head.php");
 		<!-- main content start -->
 		<div id="page-wrapper">
 			<div class="main-page">
+
+				<ol class="breadcrumb">
+					<li><a href="index.php">Dashboard</a></li>
+					<li><a href="tasks_list.php">Task List</a></li>
+					<li class="active">Add</li>
+				</ol>
 				
 				<div class="forms">
 					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
@@ -73,7 +79,7 @@ include_once("head.php");
 								<script type="text/javascript">
 								    $("#task_deadline").datetimepicker({
 								    	minView: 2,
-								    	format: "dd/MM/yyyy",
+								    	format: "yyyy/mm/dd",
 								        autoclose: true,
 								        todayBtn: true,
 								    });
@@ -173,8 +179,8 @@ include_once("head.php");
 
 
 								<div class="form-group"> 
-									<label for="task_hastag">Task #Hashtag separated by comma(,)</label> 
-									<textarea class="form-control" id="task_hastag" name="task_hastag" placeholder="Hashtag"></textarea>
+									<label for="task_hashtag">Task #Hashtag separated by comma(,)</label> 
+									<textarea class="form-control" id="task_hashtag" name="task_hashtag" placeholder="Hashtag"></textarea>
 								</div>
 
 								<button type="submit" class="btn btn-default">Submit</button> 

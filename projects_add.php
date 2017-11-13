@@ -24,6 +24,12 @@ include_once("head.php");
 		<div id="page-wrapper">
 			<div class="main-page">
 
+				<ol class="breadcrumb">
+					<li><a href="index.php">Dashboard</a></li>
+					<li><a href="projects_list.php">Project List</a></li>
+					<li class="active">Add</li>
+				</ol>
+
 				<div class="forms">
 					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
 						<div class="form-title">

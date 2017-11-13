@@ -19,6 +19,11 @@ include_once("head.php");
 		<!-- main content start -->
 		<div id="page-wrapper">
 			<div class="main-page">
+
+				<ol class="breadcrumb">
+					<li><a href="index.php">Dashboard</a></li>
+					<li class="active">Project List</li>
+				</ol>
 				
 				<div class="tables">
 					<h3 class="title1">Project List</h3>
